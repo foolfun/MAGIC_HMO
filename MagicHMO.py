@@ -9,7 +9,7 @@ from copy import deepcopy
 import json
 import argparse
 
-parser = argparse.ArgumentParser(description="Run the NAMeGEn.")
+parser = argparse.ArgumentParser(description="Run the MagicHMO.")
 parser.add_argument("-b", "--backbone", required=True, help="The backbone model to use.")
 parser.add_argument("-m", "--mode", choices=["batch", "single"], default="batch",
                     help="The mode to run: single or batch.")
@@ -29,8 +29,8 @@ f_os_base = params.data_file_os
 model = args.backbone  # 'baichuan',  'qwen', ‘glm4’, 'gpt4o','mistral', 'gemini'
 num = args.number  # df_data.shape[0]
 print(f'\n\n=============================Use {model}===============================\n\n')
-f_ours = params.test_bl_os + f'NAMeGEn/NAMeGEn_{model}.csv'
-f_ours_interRecords = params.test_bl_os + f'NAMeGEn/NAMeGEn_{model}.json'
+f_ours = params.test_bl_os + f'MagicHMO/MagicHMO_{model}.csv'
+f_ours_interRecords = params.test_bl_os + f'MagicHMO/MagicHMO_{model}.json'
 if args.ablation != '':
     f_ours = f_ours.replace('.csv', f'_{args.ablation}.csv')
     f_ours_interRecords = f_ours_interRecords.replace('.json', f'_{args.ablation}.json')
@@ -62,7 +62,7 @@ print('检索库中一共有{n}首古诗。'.format(n=df_poems.shape[0]))
 print('数据准备完成。')
 
 
-def runNAMeGEn(llm, user_input, target_kw, task_type,
+def runMagicHMO(llm, user_input, target_kw, task_type,
                retrieval, evalR, evalGen, use_imp, use_exp):
     start_time = time.time()
     f_r_poem = ''
@@ -277,7 +277,7 @@ def choose_llm_run(backbone, query_li, up_w_li, target_kw=[], task_type='',
                 continue
         try:
             print(f'Query: {user_input}')
-            final_results, all_results = runNAMeGEn(llm=llm,
+            final_results, all_results = runMagicHMO(llm=llm,
                                                     user_input=user_input,
                                                     target_kw=target_kw,
                                                     task_type=task_type,
@@ -357,7 +357,7 @@ if __name__ == '__main__':
     else:
         # 批量测试
         if args.ablation == '':
-            # NAMeGEn
+            # MagicHMO
             choose_llm_run(backbone=model, query_li=query_li, up_w_li=up_w_li,
                            target_kw=task_targets, task_type='给孩子取名')
 
