@@ -111,6 +111,15 @@ conda create -n magic-hmo python=3.10 -y
 conda activate magic-hmo
 ```
 
+### Dataset
+
+The datasets used in this project are available on Hugging Face:
+
+- Chinese Poems: https://huggingface.co/datasets/Audrey33/Chinese_poems
+- Chinese Hanzi Poem: https://huggingface.co/datasets/Audrey33/Chinese_hanzi_poem
+
+Due to size limitations, the full datasets are not included in this repository.
+
 ### Run
 
 ```bash
